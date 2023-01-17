@@ -22,7 +22,7 @@ def drones(request):
     response = http.request('GET', 'http://assignments.reaktor.com/birdnest/drones')
     soup = bs(response.data, "xml") # Pushing drone data to be handled with BeautifulSoup
     bs_drones = soup.find_all('drone') # Extracting every drone from the xml data
-
+    delta = timezone.timedelta(hours=2)
     
 
     for drone in bs_drones: # Handling drone-by-drone
@@ -57,7 +57,7 @@ def drones(request):
             distance_now = drone_loc
             shortest_distance = np.minimum(distance_now, distance_database)
 
-            person = Person(name=name_found, last_seen_date = timezone.now()+timezone.timedelta(hours=2),
+            person = Person(name=name_found, last_seen_date = timezone.now()+delta,
                             phone=phone_found, email=email_found,
                             closest_distance_in_meters=shortest_distance/1000.0)
             person.save()
@@ -65,7 +65,7 @@ def drones(request):
         # A new violating user will be added to the database
         else:
             current_distance = drone_loc
-            person = Person(name=name_found, last_seen_date = timezone.now()+timezone.timedelta(hours=2),
+            person = Person(name=name_found, last_seen_date = timezone.now()+delta,
                             phone=phone_found, email=email_found,
                             closest_distance_in_meters=current_distance/1000.0)
             person.save()
@@ -73,7 +73,7 @@ def drones(request):
     # Deleting from database users whose latest violation was over 10 minutes ago
     detections = list(Person.objects.values())
     recently_detected = {item['name']:item for item in detections}
-    time_treshold = timezone.now()-timezone.timedelta(minutes=10)
+    time_treshold = timezone.now()+delta-timezone.timedelta(minutes=10)
     Person.objects.exclude(last_seen_date__gt=time_treshold).delete()
     
     # Returning current database to the requesting Ajax function in JSON form
