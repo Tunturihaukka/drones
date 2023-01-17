@@ -7,7 +7,7 @@ import numpy as np
 import urllib3 as ulib
 from bs4 import BeautifulSoup as bs
 
-from projectsite.models import Person
+from polls.models import Person
 
 
 # This function is called when the homepage is requested. 
