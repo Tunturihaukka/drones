@@ -1,1 +1,42 @@
-success
+
+
+Rule breaking drone users in last 10 minutes:
+
+<!-- Setting the location for the drone user information -->
+<pre id="json"></pre>
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+	updateState()
+	
+	function updateState() {
+		
+
+		<!-- Requesting the most recent information about violating drone users -->
+		$.ajax({
+			url: "",
+			contentType: 'application/json', 
+			success: function(data) {
+
+			stringified_result = JSON.stringify(data, null, 4);
+			document.getElementById("json").textContent = stringified_result
+
+			}
+			
+
+		})
+		<!-- Every refresh waits 1.5 seconds on top of time needed for the iteration -->
+		
+
+		
+	}
+    })
+
+    </script>
+</head>
+
+</html>
+
