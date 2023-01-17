@@ -1,0 +1,14 @@
+asgiref==3.6.0
+beautifulsoup4==4.11.1
+bs4==0.0.1
+dj-database-url==1.2.0
+Django==4.1.5
+gunicorn==20.1.0
+lxml==4.9.2
+numpy==1.24.1
+psycopg2-binary==2.9.5
+soupsieve==2.3.2.post1
+sqlparse==0.4.3
+urllib3==1.26.14
+whitenoise==6.3.0
+Python-dotenv==0.21.0
