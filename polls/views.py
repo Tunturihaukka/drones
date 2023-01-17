@@ -12,11 +12,10 @@ from polls.models import Person
 
 # This function is called when the homepage is requested. 
 def drones(request):
-
+    
     # Initializing the homepage with the template when page is first requested.
-    #if not (request.content_type == 'application/json'):
-       # print("success")
-    return render(request, 'home.html')
+    if not (request.content_type == 'application/json'):
+        return render(request, 'home.html')
 
     # Modifying the homepage when Ajax requests JsonResponse to list the rule breaking users
     http = ulib.PoolManager()

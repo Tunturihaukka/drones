@@ -29,7 +29,10 @@ Rule breaking drone users in last 10 minutes:
 
 		})
 		<!-- Every refresh waits 1.5 seconds on top of time needed for the iteration -->
-		
+		setTimeout(function() {
+				
+    				updateState()
+			}, 1500);
 
 		
 	}
