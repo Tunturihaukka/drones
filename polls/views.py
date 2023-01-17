@@ -57,7 +57,7 @@ def drones(request):
             distance_now = drone_loc
             shortest_distance = np.minimum(distance_now, distance_database)
 
-            person = Person(name=name_found, last_seen_date = timezone.now(),
+            person = Person(name=name_found, last_seen_date = timezone.now()+timezone.timedelta(hours=2),
                             phone=phone_found, email=email_found,
                             closest_distance_in_meters=shortest_distance/1000.0)
             person.save()
@@ -65,7 +65,7 @@ def drones(request):
         # A new violating user will be added to the database
         else:
             current_distance = drone_loc
-            person = Person(name=name_found, last_seen_date = timezone.now(),
+            person = Person(name=name_found, last_seen_date = timezone.now()+timezone.timedelta(hours=2),
                             phone=phone_found, email=email_found,
                             closest_distance_in_meters=current_distance/1000.0)
             person.save()
